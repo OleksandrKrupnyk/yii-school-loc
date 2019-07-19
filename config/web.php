@@ -10,7 +10,8 @@ return [
         ],
         'request' => [
             'cookieValidationKey' => 'someinterestingstringonmymindIamHappy',
-        ]
+        ],
+        'db'=> require __DIR__.'/db.php'
     ],
     'bootstrap'  => ['debug'],
     'modules'    => [
