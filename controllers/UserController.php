@@ -8,16 +8,32 @@
 namespace app\controllers;
 
 
+use app\models\UserRecord;
 use yii\web\Controller;
 
+/**
+ * Class UserController
+ *
+ * @package app\controllers
+ */
 class UserController extends Controller
 {
-    public function actionJoin()
+    /**
+     * @return string
+     */
+    public function actionJoin(): string
     {
+        $user = new UserRecord();
+        $user->setTestUser();
+        //$user->save();
+
         return $this->render('join');
     }
 
-    public function actionLogin()
+    /**
+     * @return string
+     */
+    public function actionLogin(): string
     {
         return $this->render('login');
     }
