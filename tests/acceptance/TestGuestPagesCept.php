@@ -1,6 +1,6 @@
 <?php
 $I = new AcceptanceTester($scenario);
-$I->wantTo('perform actions and see result');
+$I->wantTo('Test pages');
 $I->amOnPage('/');
 $I->see('VideoSchool','h1');
 $I->seeLink('Join','/user/join');
