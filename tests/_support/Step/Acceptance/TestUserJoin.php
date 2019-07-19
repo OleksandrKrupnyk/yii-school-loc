@@ -7,12 +7,13 @@ class TestUserJoin extends \AcceptanceTester
 
     public function imagingUser()
     {
+        $locale = 'en_GB';
+        $faker = \Faker\Factory::create($locale);
         $user = [
-            'name'     => 'John',
-            'email'    => 'user@user.ua',
-            'password' => 'user'
+            'name'     => $faker->name('male'),
+            'email'    => $faker->freeEmail,
+            'password' => $faker->password(10,10)
         ];
-        print_r($user);
         return $user;
     }
 
