@@ -33,7 +33,10 @@ class UserController extends Controller
         $user->setTestUser();
         $model->setUserRecord($user);
         if(Yii::$app->request->isPost && $model->load(Yii::$app->request->post()) && $model->validate()){
-
+            $userRecord = new UserRecord();
+            $userRecord->setUserJoinForm($model);
+            $userRecord->save();
+            return $this->redirect(Url::to(['user/login']));
         }
         return $this->render('join', compact('model'));
     }

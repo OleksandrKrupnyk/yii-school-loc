@@ -26,7 +26,7 @@ class TestUserJoin extends \AcceptanceTester
         $I->fillField('UserJoinForm[email]', $user['email']);
         $I->fillField('UserJoinForm[password]', $user['password']);
         $I->fillField('UserJoinForm[password2]', $user['password']);
-        $I->click('Create');
+        $I->click('[Create]');
     }
 
     public function loginUser($user)
@@ -36,7 +36,7 @@ class TestUserJoin extends \AcceptanceTester
         $I->see('Log in');
         $I->fillField('UserLoginForm[email]', $user['email']);
         $I->fillField('UserLoginForm[password]', $user['password']);
-        $I->click('Enter');
+        $I->click('[Enter]');
     }
 
     public function logoutUser()
