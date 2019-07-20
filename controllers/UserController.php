@@ -9,6 +9,7 @@ namespace app\controllers;
 
 use app\models\UserIdentity;
 use app\models\UserJoinForm;
+use yii\helpers\Url;
 use yii;
 use app\models\UserRecord;
 use yii\bootstrap\ActiveForm;
@@ -43,12 +44,22 @@ class UserController extends Controller
     }
 
     /**
+     * @return Response
+     */
+    public function actionLogout() :Response
+    {
+        Yii::$app->user->logout();
+        return $this->redirect(Url::home());
+    }
+
+
+    /**
      * @return string
      */
     public function actionLogin(): string
     {
-        $uid = UserIdentity::findIdentity(1);
-        Yii::$app->user->login($uid);
+        //$uid = UserIdentity::findIdentity(1);
+        //Yii::$app->user->login($uid);
         return $this->render('login');
     }
 

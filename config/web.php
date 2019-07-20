@@ -1,6 +1,7 @@
 <?php
 return [
     'id'         => 'school',
+    'name'       => 'School Dev',
     'basePath'   => dirname(__DIR__, 1),
     // Компоненты
     'components' => [
@@ -9,13 +10,13 @@ return [
             'showScriptName'  => false,
 
         ],
-        'request' => [
+        'request'    => [
             'cookieValidationKey' => 'someinterestingstringonmymindIamHappy',
         ],
-        'db'=> require __DIR__.'/db.php',
-        'user'=>[
+        'db'         => require __DIR__ . '/db.php',
+        'user'       => [
             'identityClass' => 'app\models\UserIdentity',
-//            'enableSession'=>false
+            //            'enableSession'=>false
         ]
     ],
     'bootstrap'  => ['debug'],

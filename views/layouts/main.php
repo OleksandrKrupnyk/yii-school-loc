@@ -12,7 +12,7 @@ $this->beginPage()
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title></title>
+    <title><?=Yii::$app->name?></title>
     <?php $this->head(); ?>
 </head>
 <body>
@@ -25,11 +25,23 @@ NavBar::begin([
         'class' => 'navbar navbar-dark bg-info sticky-top'
     ]
 ]);
+
+if(Yii::$app->user->isGuest){
+
 $menu = [
     ['label' => 'Join', 'url' => ['/user/join']],
     ['label' => 'Login', 'url' => ['/user/login']]
 
 ];
+}else{
+    $name = Yii::$app->user->getIdentity()->name;
+    $menu = [
+        ['label' => "Log out ({$name})", 'url' => ['/user/logout']]
+    ];
+}
+
+
+
 echo Nav::widget([
     'options' => [
         'class' => 'navbar-nav navbar-right'
