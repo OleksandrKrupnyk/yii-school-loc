@@ -1,9 +1,15 @@
 {
+  "authors": [
+    {
+      "name": "Alex Krupnik",
+      "email": "krupnik_a@ukr.net"
+    }
+  ],
   "require": {
     "yiisoft/yii2": "2.0.23",
     "codeception/codeception": "3.0.2",
     "yiisoft/yii2-bootstrap": "^2.0.10",
-    "yiisoft/yii2-debug": "*",
+    "yiisoft/yii2-debug": "2.1.5",
     "yiisoft/yii2-faker": "^2.0"
   }
   ,
@@ -15,6 +21,12 @@
       "installer-paths": {
         "bower-asset-library": "vendor/bower"
       }
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\controllers\\":"controllers",
+      "app\\models\\":"models"
     }
   }
 }

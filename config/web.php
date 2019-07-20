@@ -11,7 +11,11 @@ return [
         'request' => [
             'cookieValidationKey' => 'someinterestingstringonmymindIamHappy',
         ],
-        'db'=> require __DIR__.'/db.php'
+        'db'=> require __DIR__.'/db.php',
+        'user'=>[
+            'identityClass' => 'app\models\UserIdentity',
+//            'enableSession'=>false
+        ]
     ],
     'bootstrap'  => ['debug'],
     'modules'    => [
