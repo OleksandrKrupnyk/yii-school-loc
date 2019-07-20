@@ -37,13 +37,21 @@ class UserRecord extends ActiveRecord
      */
     public function setTestUser(): void
     {
-        $locale = 'en_GB';
-        $faker = \Faker\Factory::create($locale);
+        $locale         = 'en_GB';
+        $faker          = \Faker\Factory::create($locale);
         $this->name     = $faker->name('male');
         $this->email    = $faker->freeEmail;
-        $this->passhash = $faker->password(10,10);
+        $this->passhash = $faker->password(10, 10);
         $this->status   = $faker->randomDigit;
     }
 
+    /**
+     * @param $email
+     * @return bool
+     */
+    public static function existEmail($email): bool
+    {
+        return 0 < (int)static::find()->where(['email' => $email])->count();
+    }
 
 }
