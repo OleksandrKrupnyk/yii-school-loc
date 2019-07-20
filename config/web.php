@@ -2,6 +2,7 @@
 return [
     'id'         => 'school',
     'basePath'   => dirname(__DIR__, 1),
+    // Компоненты
     'components' => [
         'urlManager' => [
             'enablePrettyUrl' => true,

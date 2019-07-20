@@ -8,9 +8,11 @@
 namespace app\controllers;
 
 use app\models\UserIdentity;
+use app\models\UserJoinForm;
 use yii;
 use app\models\UserRecord;
-use yii\web\Controller;
+use yii\bootstrap\ActiveForm;
+use yii\web\Controller;use yii\web\Response;
 
 /**
  * Class UserController
@@ -20,15 +22,24 @@ use yii\web\Controller;
 class UserController extends Controller
 {
     /**
-     * @return string
+     * @return array|string
      */
-    public function actionJoin(): string
+    public function actionJoin()
     {
+        $model = new UserJoinForm();
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+
+        if(Yii::$app->request->isPost && $model->load(Yii::$app->request->post()) && $model->validate()){
+
+        }
 //        $user = new UserRecord();
 //        $user->setTestUser();
 //        $user->save();
-
-        return $this->render('join');
+        return $this->render('join', compact('model'));
     }
 
     /**
