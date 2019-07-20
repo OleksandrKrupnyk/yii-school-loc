@@ -9,6 +9,7 @@ namespace app\controllers;
 
 use app\models\UserIdentity;
 use app\models\UserJoinForm;
+use app\models\UserLoginForm;
 use yii\helpers\Url;
 use yii;
 use app\models\UserRecord;
@@ -28,20 +29,16 @@ class UserController extends Controller
     public function actionJoin()
     {
         $model = new UserJoinForm();
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
-        }
-
-
+        $user = new UserRecord();
+        $user->setTestUser();
+        $model->setUserRecord($user);
         if(Yii::$app->request->isPost && $model->load(Yii::$app->request->post()) && $model->validate()){
 
         }
-//        $user = new UserRecord();
-//        $user->setTestUser();
-//        $user->save();
         return $this->render('join', compact('model'));
     }
+
+
 
     /**
      * @return Response
@@ -58,9 +55,15 @@ class UserController extends Controller
      */
     public function actionLogin(): string
     {
+        $model = new UserLoginForm();
+        if(Yii::$app->request->isPost && $model->load(Yii::$app->request->post()) && $model->validate()){
+
+        }
         //$uid = UserIdentity::findIdentity(1);
         //Yii::$app->user->login($uid);
-        return $this->render('login');
+        return $this->render('login',compact('model'));
     }
+
+
 
 }

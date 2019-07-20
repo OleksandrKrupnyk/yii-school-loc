@@ -8,13 +8,17 @@
 namespace app\models;
 
 
-use phpDocumentor\Reflection\Types\Parent_;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
 /**
  * Class UserJoinForm
  *
+ * @property string     $name
+ * @property string     $email
+ * @property string     $password
+ * @property UserRecord $userRecord
+ * @property string     $password2
  * @package app\models
  */
 class UserJoinForm extends Model
@@ -52,9 +56,18 @@ class UserJoinForm extends Model
             [['name', 'email', 'password', 'password2'], 'trim'],
             [['name', 'email', 'password', 'password2'], 'required'],
             [['email'], 'email'],
-            [['password', 'password2'], 'string', 'min' => 3],
+            [['name', 'email', 'password', 'password2'], 'string', 'min' => 3, 'max' => 60],
             [['password2'], 'compare', 'compareAttribute' => 'password', 'message' => "Passwords don't match"],
-            [['name', 'email', 'password', 'password2'], 'string', 'max' => 60],
         ]);
+    }
+
+    /**
+     * @param UserRecord $user
+     */
+    public function setUserRecord(UserRecord $user): void
+    {
+        $this->name     = $user->name;
+        $this->email    = $user->email;
+        $this->password = $this->password2 = '123456';
     }
 }

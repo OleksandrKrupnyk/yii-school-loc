@@ -15,6 +15,8 @@ use yii\web\IdentityInterface;
  * Class UserIdentity
  *
  * @package app\models
+ *
+ * @property string $authKey
  */
 class UserIdentity extends UserRecord implements IdentityInterface
 {
