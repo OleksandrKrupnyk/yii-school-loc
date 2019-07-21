@@ -29,11 +29,11 @@ class TestUserJoin extends \AcceptanceTester
         $I->click('[Create]');
     }
 
-    public function loginUser($user)
+    public function loginUser(array $user)
     {
         $I = $this;
         $I->amOnPage('/user/login');
-        $I->see('Log in');
+        $I->see('Log in','h1');
         $I->fillField('UserLoginForm[email]', $user['email']);
         $I->fillField('UserLoginForm[password]', $user['password']);
         $I->click('[Enter]');
@@ -42,7 +42,7 @@ class TestUserJoin extends \AcceptanceTester
     public function logoutUser()
     {
         $I = $this;
-        $I->click('/user/logout');
+        $I->amOnPage('/user/logout');
     }
 
     public function isUserLogged($user)

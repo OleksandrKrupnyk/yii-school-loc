@@ -31,7 +31,7 @@ $I->noUserLogged($user1);
 $I->logoutUser();
 
 
-$user1=['password'=>'wrong password'];
+$user1['password']='wrong password';
 $I->loginUser($user1);
 $I->see('Wrong password');
 
