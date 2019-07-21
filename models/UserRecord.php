@@ -46,12 +46,12 @@ class UserRecord extends ActiveRecord
      */
     public function setTestUser(): void
     {
-        $locale         = 'en_GB';
-        $faker          = \Faker\Factory::create($locale);
-        $this->name     = $faker->name('male');
-        $this->email    = $faker->freeEmail;
-        $this->passhash = $faker->password(10, 10);
-        $this->status   = $faker->randomDigit;
+        $locale      = 'en_GB';
+        $faker       = \Faker\Factory::create($locale);
+        $this->name  = $faker->name('male');
+        $this->email = $faker->freeEmail;
+        $this->setPassword($faker->password(10, 10));
+        $this->status = $faker->randomDigit;
     }
 
     /**
@@ -68,11 +68,15 @@ class UserRecord extends ActiveRecord
      */
     public function setUserJoinForm(UserJoinForm $model): void
     {
-        $this->email    = $model->email;
-        $this->name     = $model->name;
-        $this->passhash = $model->password;
-        $this->status   = 1;
+        $this->email = $model->email;
+        $this->name  = $model->name;
+        $this->$this->setPassword($model->password);
+        $this->status = 1;
 
     }
 
+    public function setPassword($password):void
+    {
+        $this->passhash = $password;
+    }
 }
