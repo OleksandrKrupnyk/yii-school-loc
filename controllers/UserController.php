@@ -59,14 +59,15 @@ class UserController extends Controller
     public function actionLogin()
     {
         $model = new UserLoginForm();
-        if(Yii::$app->request->isPost
+        if (Yii::$app->request->isPost
             && $model->load(Yii::$app->request->post())
             && $model->validate()
-            && $model->login()
-        ){
-                return $this->redirect(Url::home());
+
+        ) {
+            $model->login();
+            return $this->redirect(Url::home());
         }
-        return $this->render('login',compact('model'));
+        return $this->render('login', compact('model'));
     }
 
 

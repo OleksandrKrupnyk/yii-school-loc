@@ -49,7 +49,8 @@ class UserLoginForm extends Model
             [['email'], 'email'],
             [['password',], 'string', 'min' => 3],
             [['email', 'password',], 'string', 'max' => 60],
-            [['email'], 'errorIfEmailNotFound']
+            [['email'], 'errorIfEmailNotFound'],
+            [['password'], 'errorIfWrongPassword']
         ]);
     }
 
@@ -64,6 +65,17 @@ class UserLoginForm extends Model
         }
 
     }
+ public function errorIfWrongPassword(): void
+    {
+        if ($this->hasErrors()) {
+            return;
+        }
+        $model = UserRecord::findUserByEmail($this->email);
+        if ($model === null || $model->passhash !== $this->password) {
+            $this->addError('password', 'Wrong password');
+        }
+
+    }
 
     public function login()
     {
@@ -72,12 +84,13 @@ class UserLoginForm extends Model
         }
 
         $userRecord = UserRecord::findUserByEmail($this->email);
-        if ($userRecord !== null && $userRecord->passhash === $this->password) {
+        if ($userRecord !== null) {
             $uid = UserIdentity::findIdentity($userRecord->id);
             Yii::$app->user->login($uid);
             return true;
         }
-        $this->addError('password','Password wrong');
+
+        $this->addError('password','Wrong password');
         return false;
 
     }

@@ -42,7 +42,7 @@ class TestUserJoin extends \AcceptanceTester
     public function logoutUser()
     {
         $I = $this;
-        $I->click('/use/logout');
+        $I->click('/user/logout');
     }
 
     public function isUserLogged($user)
