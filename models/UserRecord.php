@@ -19,6 +19,7 @@ use yii\db\ActiveRecord;
  * @property string $name
  * @property string $email
  * @property string $passhash
+ * @property string $authokey
  * @property int    $status
  *
  * @package models
@@ -80,6 +81,7 @@ class UserRecord extends ActiveRecord
     public function setPassword($password):void
     {
         $this->passhash = Yii::$app->security->generatePasswordHash($password);
+        $this->authokey = (string) Yii::$app->security->generateRandomString(100);
     }
 
     public function vaidatePassword($password):bool
