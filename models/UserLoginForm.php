@@ -28,6 +28,10 @@ class UserLoginForm extends Model
      */
     public $password;
     /**
+     * @var bool
+     */
+    public $remember;
+    /**
      * @var UserRecord
      */
     private $modelUserRecord;
@@ -50,6 +54,7 @@ class UserLoginForm extends Model
         return ArrayHelper::merge(parent::rules(), [
             [['email', 'password',], 'trim'],
             [['email', 'password',], 'required'],
+            [['remember'], 'boolean'],
             [['email'], 'email'],
             [['password',], 'string', 'min' => 3],
             [['email', 'password',], 'string', 'max' => 60],
@@ -94,7 +99,7 @@ class UserLoginForm extends Model
         $model = $this->modelUserRecord;
         if ($model !== null) {
             $uid = UserIdentity::findIdentity($model->id);
-            Yii::$app->user->login($uid);
+            Yii::$app->user->login($uid, $this->remember ?3600:0);
             return true;
         }
 

@@ -24,6 +24,11 @@ echo $form->field($model, 'email')
 echo $form->field($model, 'password')
     ->passwordInput()
     ->label(Yii::t('app', 'Password'));
+echo $form->field($model, 'remember')
+    ->checkbox([
+        'template' => '<div class="control-label col-sm-3">{label}</div><div class="col-md-6">{input}</div><p class="help-block help-block-error ">{error}</p>'
+    ])
+    ->label(Yii::t('app', 'Remember me'));
 echo Html::submitButton('[' . Yii::t('app', 'Enter') . ']', ['class' => 'btn btn-primary']);
 ActiveForm::end();
 echo Html::endTag('div');
