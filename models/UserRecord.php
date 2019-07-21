@@ -33,6 +33,15 @@ class UserRecord extends ActiveRecord
     }
 
     /**
+     * @param string $email
+     * @return UserRecord|null
+     */
+    public static function findUserByEmail(string $email): ?UserRecord
+    {
+        return static::findOne(['email' => $email]);
+    }
+
+    /**
      *
      */
     public function setTestUser(): void
@@ -59,10 +68,10 @@ class UserRecord extends ActiveRecord
      */
     public function setUserJoinForm(UserJoinForm $model): void
     {
-        $this->email = $model->email;
-        $this->name = $model->name;
+        $this->email    = $model->email;
+        $this->name     = $model->name;
         $this->passhash = $model->password;
-        $this->status = 1;
+        $this->status   = 1;
 
     }
 

@@ -20,7 +20,7 @@ $form = ActiveForm::begin(['id' => 'user-login-form', 'layout' => 'horizontal'])
  */
 echo $form->field($model, 'email')
     ->input('email')
-    ->label(Yii::t('app', 'Email'));
+    ->label(Yii::t('app', 'E-mail'));
 echo $form->field($model, 'password')
     ->passwordInput()
     ->label(Yii::t('app', 'Password'));

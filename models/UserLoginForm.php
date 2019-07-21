@@ -8,6 +8,7 @@
 namespace app\models;
 
 
+use Yii;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -48,6 +49,36 @@ class UserLoginForm extends Model
             [['email'], 'email'],
             [['password',], 'string', 'min' => 3],
             [['email', 'password',], 'string', 'max' => 60],
+            [['email'], 'errorIfEmailNotFound']
         ]);
+    }
+
+    public function errorIfEmailNotFound(): void
+    {
+        if ($this->hasErrors()) {
+            return;
+        }
+        $model = UserRecord::findUserByEmail($this->email);
+        if ($model === null || $model->email !== $this->email) {
+            $this->addError('email', 'This email does not register');
+        }
+
+    }
+
+    public function login()
+    {
+        if ($this->hasErrors()) {
+            return false;
+        }
+
+        $userRecord = UserRecord::findUserByEmail($this->email);
+        if ($userRecord !== null && $userRecord->passhash === $this->password) {
+            $uid = UserIdentity::findIdentity($userRecord->id);
+            Yii::$app->user->login($uid);
+            return true;
+        }
+        $this->addError('password','Password wrong');
+        return false;
+
     }
 }
