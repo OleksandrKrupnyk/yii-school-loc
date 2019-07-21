@@ -27,7 +27,9 @@ class UserLoginForm extends Model
      * @var string
      */
     public $password;
-
+    /**
+     * @var UserRecord
+     */
     private $modelUserRecord;
 
     /**
@@ -73,8 +75,11 @@ class UserLoginForm extends Model
         if ($this->hasErrors()) {
             return;
         }
+        /**
+         * @var UserRecord $model
+         */
         $model = $this->modelUserRecord;
-        if ($model === null || $model->passhash !== $this->password) {
+        if ($model === null || !$model->vaidatePassword($this->password)) {
             $this->addError('password', 'Wrong password');
         }
 

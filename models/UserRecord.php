@@ -8,6 +8,8 @@
 namespace app\models;
 
 
+use Yii;
+use yii\base\Security;
 use yii\db\ActiveRecord;
 
 /**
@@ -70,13 +72,18 @@ class UserRecord extends ActiveRecord
     {
         $this->email = $model->email;
         $this->name  = $model->name;
-        $this->$this->setPassword($model->password);
+        $this->setPassword($model->password);
         $this->status = 1;
 
     }
 
     public function setPassword($password):void
     {
-        $this->passhash = $password;
+        $this->passhash = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    public function vaidatePassword($password):bool
+    {
+        return Yii::$app->security->validatePassword($password, $this->passhash);
     }
 }
